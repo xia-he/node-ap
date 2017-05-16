@@ -1,0 +1,32 @@
+<% include layouts/head.ejs %>
+<div>
+  手机号:<input type="text" name="mobile" value=""/><br/>
+  密  码:<input type="password" name="password" value=""/><br/>
+  <input type="button" value="登陆" onclick="login()" />
+  <a href="zhuce">注册</a>
+  <a href="xiugaimima">修改密码</a>
+</div>
+</body>
+<script type="text/javascript">
+  function login() {
+    // document.getElementById('nickname').value,
+    var mobile = $("input[name=mobile]").val();
+    var password = $("input[name=password]").val();
+    $.ajax({　　
+        type: "post",
+        url: "/user/login",
+        async: false,
+        data: {mobile:mobile,password:password},
+        success: function(result) {
+            console.log(result);
+            console.log(result.code);
+            if (result.code==200) {
+              alert("ok");
+            } else {
+              alert("登陆失败");
+            }
+        }
+    });
+  }
+</script>
+</html>

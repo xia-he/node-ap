@@ -1,0 +1,30 @@
+<% include layouts/head.ejs %>
+<div>
+  手机号:<input type="text" name="mobile" value=""/><br/>
+  密  码:<input type="password" name="password" value=""/><br/>
+  <input type="button" value="修改" onclick="xg()" />
+</div>
+</body>
+<script type="text/javascript">
+function xg() {
+  var mobile= $("input[name=mobile]").val();
+  var password= $("input[name=password]").val();
+  console.log(mobile+"--"+password);
+  $.ajax({　　
+      type: "post",
+      url: "/user/xg",
+      async: false,
+      data: {mobile:mobile,password:password},
+      success: function(result) {
+          console.log(result);
+          console.log(result.code);
+          if (result.code==200) {
+            alert("ok");
+          } else {
+            alert("登陆失败");
+          }
+      }
+  });
+}
+</script>
+</html>

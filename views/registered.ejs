@@ -1,0 +1,42 @@
+<% include layouts/head.ejs %>
+    <div>
+        <div>
+            手机号：<input type="text" name="mobile" value="" placeholder="请输入手机号！" />
+        </div>
+        <div>
+            密码：<input type="password" name="password" value="" placeholder="请输入密码！" />
+        </div>
+        <div>
+            密码：<input type="password" name="password1" value="" placeholder="确认密码！" />
+        </div>
+        <input type="button" onclick="zhuce()" name="" value="注册">
+    </div>
+    </body>
+    <script type="text/javascript">
+        function zhuce() {
+            var mobile = $("input[name =mobile]").val();
+            var password = $("input[name =password]").val();
+            var password1 = $("input[name =password1]").val();
+            if (password!=password1) {
+                alert("两次密码不相同!");
+            } else {
+              $.ajax({　　
+                  type: "post",
+                  url: "/user/register",
+                  async: false,
+                  data: {mobile:mobile,password:password},
+                  success: function(result) {
+                      console.log(result.code);
+                      if (result.code==200) {
+                        alert("注册OK");
+                        window.location.href='index';
+                      } else{
+                        alert("注册失败");
+                      }
+                  }
+              });
+            }
+        }
+    </script>
+
+    </html>
